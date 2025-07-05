@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 
-public class Object {
+public class Furniture {
     private int id;
     private String name;
     private int price;
@@ -13,9 +13,9 @@ public class Object {
     private int depth; //세로
     private int height; // 높이
 
-    Object(){}
+    Furniture(){}
 
-    Object(int id, String name, int price, int category, int width, int depth, int height) {
+    Furniture(int id, String name, int price, int category, int width, int depth, int height) {
         this.id = id;
         this.name = name;
         this.price = price;

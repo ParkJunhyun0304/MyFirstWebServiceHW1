@@ -3,16 +3,16 @@ package com.house;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ObejctCRUD implements  ICRUD{
+public class FurnitureCRUD implements  ICRUD{
     Scanner scanner = new Scanner(System.in);
-    ArrayList<Object> list;
+    ArrayList<Furniture> list;
 
-    ObejctCRUD() {
+    FurnitureCRUD() {
         list = new ArrayList<>();
     }
 
     @Override
-    public Object add() {
+    public Furniture add() {
         System.out.println("이름 : ");
         String name = scanner.nextLine();
 
@@ -42,20 +42,21 @@ public class ObejctCRUD implements  ICRUD{
         System.out.println("가격 입력(원) : ");
         int price = scanner.nextInt();
 
-        return new Object(0, name, category, width, depth, height, price);
+        return new Furniture(0, name, category, width, depth, height, price);
     }
 
     public void addObject() {
+        Furniture furniture = add();
 
     }
 
     @Override
-    public int update(Object obj) {
+    public int update(Furniture obj) {
         return 0;
     }
 
     @Override
-    public int delete(Object obj) {
+    public int delete(Furniture obj) {
         return 0;
     }
 

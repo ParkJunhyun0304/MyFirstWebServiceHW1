@@ -2,7 +2,7 @@ package com.house;
 
 import java.util.Scanner;
 
-public class ObjectManager {
+public class FurnitureManager {
     Scanner scanner = new Scanner(System.in);
 
     public void start() {
