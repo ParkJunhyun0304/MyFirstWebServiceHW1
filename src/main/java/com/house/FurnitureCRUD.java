@@ -203,9 +203,25 @@ public class FurnitureCRUD implements  ICRUD{
                 list.add(new Furniture(0, name, price, category, width, depth, height));
                 count ++;
             }
-
             br.close();
             System.out.println(count+"개의 가구 로딩 완료\n");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void saveFile() {
+        try {
+            PrintWriter pw = new PrintWriter(new FileWriter(fileName));
+
+            StringBuilder sb = new StringBuilder();
+            for(Furniture furniture : list) {
+                sb.append(furniture.toFileString());
+                sb.append("\n");
+            }
+            pw.write(sb.toString());
+            pw.close();
+            System.out.println("저장 완료");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

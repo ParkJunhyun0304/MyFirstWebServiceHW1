@@ -50,4 +50,12 @@ public class Furniture {
         builder.append("[d:").append(depth).append("mm]").append("][h:").append(height).append("mm]");
         return builder.toString();
     }
+
+    public String toFileString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(name).append(",").append(price).append(",").append(category).append(",")
+                .append(width).append(",").append(depth).append(",").append(height);
+        return sb.toString();
+    }
 }

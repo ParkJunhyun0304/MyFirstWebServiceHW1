@@ -37,6 +37,7 @@ public class FurnitureManager {
                 // 가구 삭제
             } else if(menu == 7) {
                 // 가구 저장
+                furnitureCRUD.saveFile();
             }
 
         }
