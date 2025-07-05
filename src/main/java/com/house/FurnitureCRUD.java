@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FurnitureCRUD implements  ICRUD{
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner;
     ArrayList<Furniture> list;
 
-    FurnitureCRUD() {
+    FurnitureCRUD(Scanner scanner) {
         list = new ArrayList<>();
+        this.scanner = scanner;
     }
 
     @Override

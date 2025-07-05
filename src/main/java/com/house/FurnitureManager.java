@@ -4,13 +4,18 @@ import java.util.Scanner;
 
 public class FurnitureManager {
     Scanner scanner = new Scanner(System.in);
+    FurnitureCRUD furnitureCRUD;
+
+    FurnitureManager() {
+        furnitureCRUD = new FurnitureCRUD(scanner);
+    }
 
     public void start() {
         while(true) {
             int menu = selectMenu();
             if(menu == 0) break;
             if(menu == 4) {
-                // create
+                furnitureCRUD.addFurniture();
             } else if(menu == 1) {
                 // 모든 물건보기
             } else if(menu == 2) {
