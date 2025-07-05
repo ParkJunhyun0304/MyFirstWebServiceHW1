@@ -15,26 +15,28 @@ public class FurnitureManager {
             int menu = selectMenu();
             if(menu == 0) break;
             if(menu == 4) {
+                // 가구 추가
                 furnitureCRUD.addFurniture();
             } else if(menu == 1) {
                 // 모든 물건보기
+                furnitureCRUD.listAll();
             } else if(menu == 2) {
                 // 카테고리별 물건 보기
             } else if(menu == 3) {
-                // 물건 검색
+                // 가구 검색
             } else if(menu == 5) {
-                // 물건 수정
+                // 가구 수정
             } else if(menu == 6) {
-                // 물건 삭제
+                // 가구 삭제
             } else if(menu == 7) {
-                // 물건 저장
+                // 가구 저장
             }
 
         }
     }
 
     public int selectMenu() {
-        System.out.print("------- 오늘의 집 -------\n" +
+        System.out.print("======= 오늘의 집 =======\n" +
                 "1. 모든 가구 보기\n" +
                 "2. 카테고리별 물건 보기\n" +
                 "3. 가구 검색\n" +
