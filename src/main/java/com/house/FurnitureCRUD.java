@@ -45,9 +45,10 @@ public class FurnitureCRUD implements  ICRUD{
         return new Furniture(0, name, category, width, depth, height, price);
     }
 
-    public void addObject() {
-        Furniture furniture = add();
-
+    public void addFurniture() {
+        Furniture furniture = (Furniture)add();
+        list.add(furniture);
+        System.out.println("가구가 정상적으로 등록 되었습니다.\n");
     }
 
     @Override
