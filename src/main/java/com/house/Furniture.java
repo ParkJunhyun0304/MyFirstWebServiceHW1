@@ -1,6 +1,7 @@
 package com.house;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Map;
 
@@ -21,6 +22,13 @@ public class Furniture {
             "유아동기구", "야외기구", "가벽/파티션"
     };
 
+    public void setData(int price, int width, int depth, int height) {
+        this.price = price;
+        this.width = width;
+        this.depth = depth;
+        this.height = height;
+    }
+
     Furniture(){}
 
     Furniture(int id, String name, int price, int category, int width, int depth, int height) {
@@ -39,7 +47,7 @@ public class Furniture {
 
         builder.append(name).append(" (").append(price).append("원)");
         builder.append("[").append(categories[category-1]).append("] [w:").append(width).append("mm]");
-        builder.append("][h:").append(height).append("mm]").append("[d:").append(depth).append("mm]");
+        builder.append("[d:").append(depth).append("mm]").append("][h:").append(height).append("mm]");
         return builder.toString();
     }
 }

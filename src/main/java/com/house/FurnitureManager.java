@@ -30,7 +30,9 @@ public class FurnitureManager {
                 furnitureCRUD.selectOne(id);
             } else if(menu == 5) {
                 // 가구 수정
+                furnitureCRUD.update();
             } else if(menu == 6) {
+                furnitureCRUD.delete();
                 // 가구 삭제
             } else if(menu == 7) {
                 // 가구 저장
