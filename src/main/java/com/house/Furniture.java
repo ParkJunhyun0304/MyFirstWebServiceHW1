@@ -15,7 +15,7 @@ public class Furniture {
     private int depth; //세로
     private int height; // 높이
 
-    private String[] categories = {
+    String[] categories = {
             "침대", "매트리스 토퍼", "테이블/식탁/책상", "소파",
             "서랍/수납장", "행거/옷장", "거울", "화장대/콘솔",
             "유아동기구", "야외기구", "가벽/파티션"

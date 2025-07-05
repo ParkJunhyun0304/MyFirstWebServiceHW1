@@ -22,8 +22,12 @@ public class FurnitureManager {
                 furnitureCRUD.listAll();
             } else if(menu == 2) {
                 // 카테고리별 물건 보기
+                furnitureCRUD.findByCategory();
             } else if(menu == 3) {
                 // 가구 검색
+                System.out.print("검색을 원하는 가구의 번호를 입력하세요 : ");
+                int id = scanner.nextInt();
+                furnitureCRUD.selectOne(id);
             } else if(menu == 5) {
                 // 가구 수정
             } else if(menu == 6) {

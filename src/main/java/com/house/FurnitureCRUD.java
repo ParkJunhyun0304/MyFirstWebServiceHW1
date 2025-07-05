@@ -50,6 +50,7 @@ public class FurnitureCRUD implements  ICRUD{
 
     @Override
     public int update(Furniture obj) {
+        System.out.print("수정할 가구의 카테고리 선택");
         return 0;
     }
 
@@ -60,15 +61,49 @@ public class FurnitureCRUD implements  ICRUD{
 
     @Override
     public void selectOne(int id) {
+        if(id > list.size() || id <= 0) {
+            System.out.println("입력값이 잘못되었습니다.");
+            return;
+        }
+        System.out.println("\n=====================");
 
+        System.out.print((id) + " ");
+        System.out.println(list.get(id-1).toString());
+
+        System.out.println("=====================\n");
+    }
+
+    public void findByCategory() {
+        String[] categories = {
+                "침대", "매트리스 토퍼", "테이블/식탁/책상", "소파",
+                "서랍/수납장", "행거/옷장", "거울", "화장대/콘솔",
+                "유아동기구", "야외기구", "가벽/파티션"
+        };
+        System.out.println("\n=====================");
+
+        System.out.print("검색을 원하는 카테고리의 번호를 입력하세요 : ");
+        int searchIndex = scanner.nextInt();
+
+        System.out.println(categories[searchIndex-1] +"에 해당하는 가구들");
+
+        for(int i=0; i<list.size(); i++) {
+            if(list.get(i).getCategory() == searchIndex) {
+                System.out.print((i+1) + " ");
+                System.out.println(list.get(i).toString());
+            }
+        }
+
+        System.out.println("=====================\n");
     }
 
     public void listAll() {
-        System.out.println("=====================");
+        System.out.println("\n=====================");
+
         for(int i=0; i<list.size(); i++) {
             System.out.print((i+1) + " ");
             System.out.println(list.get(i).toString());
         }
-        System.out.println("=====================");
+
+        System.out.println("=====================\n");
     }
 }
