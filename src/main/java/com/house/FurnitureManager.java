@@ -29,13 +29,12 @@ public class FurnitureManager {
             } else if(menu == 7) {
                 // 물건 저장
             }
-            System.out.println(menu);
 
         }
     }
 
     public int selectMenu() {
-        System.out.println("------- 오늘의 집 -------\n" +
+        System.out.print("------- 오늘의 집 -------\n" +
                 "1. 모든 가구 보기\n" +
                 "2. 카테고리별 물건 보기\n" +
                 "3. 가구 검색\n" +
