@@ -12,6 +12,7 @@ public class FurnitureManager {
 
     public void start() {
 //        furnitureCRUD.loadFile();
+        furnitureCRUD.loadData(0);
         while(true) {
             int menu = selectMenu();
             if(menu == 0) break;
@@ -20,7 +21,7 @@ public class FurnitureManager {
                 furnitureCRUD.addFurniture();
             } else if(menu == 1) {
                 // 모든 물건보기
-                furnitureCRUD.listAll();
+                furnitureCRUD.listAll(0);
             } else if(menu == 2) {
                 // 카테고리별 물건 보기
                 furnitureCRUD.findByCategory();
@@ -31,13 +32,10 @@ public class FurnitureManager {
                 furnitureCRUD.selectOne(id);
             } else if(menu == 5) {
                 // 가구 수정
-                furnitureCRUD.update();
+                furnitureCRUD.updateFurn();
             } else if(menu == 6) {
-                furnitureCRUD.delete();
+                furnitureCRUD.deleteFurn();
                 // 가구 삭제
-            } else if(menu == 7) {
-                // 가구 저장
-//                furnitureCRUD.saveFile();
             }
 
         }
@@ -51,7 +49,6 @@ public class FurnitureManager {
                 "4. 가구 추가\n" +
                 "5. 가구 수정\n" +
                 "6. 가구 삭제\n" +
-                "7. 가구 저장\n" +
                 "0. 나가기\n\n" +
                 "원하는 메뉴 => ");
 
