@@ -1,15 +1,16 @@
 package com.house;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FurnitureCRUD implements  ICRUD{
-    final String selectall = "select * from Furniture";
+    final String SELECT_ALL = "SELECT * FROM Furniture";
+    final String FURN_INSERT = "INSERT INTO Furniture (name, price, category, width, depth, height)" +
+            "VALUES (?,?,?,?,?,?)";
+    final String FURN_UPDATE = "UPDATE INTO Furniture SET (price, width, depth, height)" +
+            "VALUES (?,?,?,?) WHERE id = ?";
 
     Scanner scanner;
     ArrayList<Furniture> list;
@@ -32,7 +33,7 @@ public class FurnitureCRUD implements  ICRUD{
         list.clear();
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(selectall);
+            ResultSet resultSet = statement.executeQuery(SELECT_ALL);
             while(true) {
                 if(!resultSet.next()) break;
                 int id = resultSet.getInt("id");
@@ -52,7 +53,28 @@ public class FurnitureCRUD implements  ICRUD{
     }
 
     @Override
-    public Furniture add() {
+    public int add(Object object) {
+        Furniture furniture = (Furniture) object;
+        int result = 0;
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(FURN_INSERT);
+            preparedStatement.setString(1, furniture.getName());
+            preparedStatement.setInt(2, furniture.getPrice());
+            preparedStatement.setInt(3, furniture.getCategory());
+            preparedStatement.setInt(4, furniture.getWidth());
+            preparedStatement.setInt(5, furniture.getDepth());
+            preparedStatement.setInt(6, furniture.getHeight());
+            result = preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result;
+    }
+
+    public void addFurniture() {
         System.out.print("이름 : ");
         scanner.nextLine();
         String name = scanner.nextLine();
@@ -78,16 +100,15 @@ public class FurnitureCRUD implements  ICRUD{
         System.out.print("가격 입력(원) : ");
         int price = scanner.nextInt();
 
-        return new Furniture(0, name, price, category, width, depth, height);
+        Furniture furniture = new Furniture(0, name, price, category, width, depth, height);
+        int success = add(furniture);
+        if(success == 1) {
+            System.out.println("가구가 정상적으로 등록 되었습니다.");
+        } else {
+            System.out.println("가구 등록에 실패했습니다.");
+        }
     }
 
-    public void addFurniture() {
-        Furniture furniture = (Furniture)add();
-        list.add(furniture);
-        System.out.println("가구가 정상적으로 등록 되었습니다.");
-    }
-
-    @Override
     public int update() {
         System.out.print("수정할 가구의 카테고리를 입력하세요 : ");
         int searchIndex = scanner.nextInt();
@@ -120,7 +141,6 @@ public class FurnitureCRUD implements  ICRUD{
         return 0;
     }
 
-    @Override
     public int delete() {
         System.out.print("삭제할 가구의 카테고리를 입력하세요 : ");
         int searchIndex = scanner.nextInt();
@@ -148,7 +168,6 @@ public class FurnitureCRUD implements  ICRUD{
         return 0;
     }
 
-    @Override
     public void selectOne(int id) {
         if(id > list.size() || id <= 0) {
             System.out.println("입력값이 잘못되었습니다.\n");
