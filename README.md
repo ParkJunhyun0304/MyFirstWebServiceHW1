@@ -3,6 +3,10 @@
 
 ## 프로그램 설명
 - 오늘의 집을 모티브로 하여 판매할 가구 등록 CRUD 프로그램입니다.
+- 브랜치 설명
+  * CRUD version : 비영속적 방식의 CRUD 개발 브랜치
+  * withFile : local file 기반 데이터 자장 방식의 CRUD 개발 브랜치
+  * withDB : SQLite DataBase 기반의 CRUD 개발 브랜치
 ### 기술 스택 및 개발환경
 - 언어 : Java17 이상
 - DB : SQLite3 (GUI : DB Browser for SQLite 사용)
