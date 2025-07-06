@@ -11,7 +11,7 @@ public class FurnitureManager {
     }
 
     public void start() {
-        furnitureCRUD.loadFile();
+//        furnitureCRUD.loadFile();
         while(true) {
             int menu = selectMenu();
             if(menu == 0) break;
@@ -37,7 +37,7 @@ public class FurnitureManager {
                 // 가구 삭제
             } else if(menu == 7) {
                 // 가구 저장
-                furnitureCRUD.saveFile();
+//                furnitureCRUD.saveFile();
             }
 
         }

@@ -1,13 +1,20 @@
 package com.house;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FurnitureCRUD implements  ICRUD{
+    final String selectall = "select * from Furniture";
+
     Scanner scanner;
     ArrayList<Furniture> list;
-    final String fileName = "Furniture.txt";
+//    final String fileName = "Furniture.txt";
+    Connection connection;
 
     String[] categories = {
             "침대", "매트리스 토퍼", "테이블/식탁/책상", "소파",
@@ -18,6 +25,30 @@ public class FurnitureCRUD implements  ICRUD{
     FurnitureCRUD(Scanner scanner) {
         list = new ArrayList<>();
         this.scanner = scanner;
+        connection = DBConnection.getConnection();
+    }
+
+    public void loadData() {
+        list.clear();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(selectall);
+            while(true) {
+                if(!resultSet.next()) break;
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                int price = resultSet.getInt("price");
+                int category = resultSet.getInt("category");
+                int width = resultSet.getInt("width");
+                int depth = resultSet.getInt("depth");
+                int height = resultSet.getInt("height");
+                list.add(new Furniture(id, name, price, category, width, depth, height));
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -152,6 +183,7 @@ public class FurnitureCRUD implements  ICRUD{
     }
 
     public void listAll() {
+        loadData();
         System.out.println("\n=====================");
 
         for(int i=0; i<list.size(); i++) {
@@ -183,47 +215,47 @@ public class FurnitureCRUD implements  ICRUD{
         } else return searchList;
     }
 
-    public void loadFile() {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            String line;
-            int count = 0;
-
-            while(true) {
-                line = br.readLine();
-                if(line == null) break;
-                String data[] = line.split(",");
-                String name = data[0];
-                int price = Integer.parseInt(data[1]);
-                int category = Integer.parseInt(data[2]);
-                int width = Integer.parseInt(data[3]);
-                int depth = Integer.parseInt(data[4]);
-                int height = Integer.parseInt(data[5]);
-
-                list.add(new Furniture(0, name, price, category, width, depth, height));
-                count ++;
-            }
-            br.close();
-            System.out.println(count+"개의 가구 로딩 완료\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void saveFile() {
-        try {
-            PrintWriter pw = new PrintWriter(new FileWriter(fileName));
-
-            StringBuilder sb = new StringBuilder();
-            for(Furniture furniture : list) {
-                sb.append(furniture.toFileString());
-                sb.append("\n");
-            }
-            pw.write(sb.toString());
-            pw.close();
-            System.out.println("저장 완료");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public void loadFile() {
+//        try {
+//            BufferedReader br = new BufferedReader(new FileReader(fileName));
+//            String line;
+//            int count = 0;
+//
+//            while(true) {
+//                line = br.readLine();
+//                if(line == null) break;
+//                String data[] = line.split(",");
+//                String name = data[0];
+//                int price = Integer.parseInt(data[1]);
+//                int category = Integer.parseInt(data[2]);
+//                int width = Integer.parseInt(data[3]);
+//                int depth = Integer.parseInt(data[4]);
+//                int height = Integer.parseInt(data[5]);
+//
+//                list.add(new Furniture(0, name, price, category, width, depth, height));
+//                count ++;
+//            }
+//            br.close();
+//            System.out.println(count+"개의 가구 로딩 완료\n");
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    public void saveFile() {
+//        try {
+//            PrintWriter pw = new PrintWriter(new FileWriter(fileName));
+//
+//            StringBuilder sb = new StringBuilder();
+//            for(Furniture furniture : list) {
+//                sb.append(furniture.toFileString());
+//                sb.append("\n");
+//            }
+//            pw.write(sb.toString());
+//            pw.close();
+//            System.out.println("저장 완료");
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }
