@@ -1,8 +1,7 @@
 package com.house;
 
 public interface ICRUD {
-    public Furniture add();
-    public int update();
-    public int delete();
-    public void selectOne(int id);
+    public int add(Object obj);
+    public int update(Object obj);
+    public int delete(Object obj);
 }
