@@ -182,32 +182,4 @@ public class FurnitureCRUD implements  ICRUD{
             return null;
         } else return searchList;
     }
-
-    public void loadFile() {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            String line;
-            int count = 0;
-
-            while(true) {
-                line = br.readLine();
-                if(line == null) break;
-                String data[] = line.split(",");
-                String name = data[0];
-                int price = Integer.parseInt(data[1]);
-                int category = Integer.parseInt(data[2]);
-                int width = Integer.parseInt(data[3]);
-                int depth = Integer.parseInt(data[4]);
-                int height = Integer.parseInt(data[5]);
-
-                list.add(new Furniture(0, name, price, category, width, depth, height));
-                count ++;
-            }
-
-            br.close();
-            System.out.println(count+"개의 가구 로딩 완료\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

@@ -11,7 +11,6 @@ public class FurnitureManager {
     }
 
     public void start() {
-        furnitureCRUD.loadFile();
         while(true) {
             int menu = selectMenu();
             if(menu == 0) break;
